@@ -12,10 +12,6 @@ function App() {
           path: "componentgenerator",
           element: <ComponentGenerator />,
         },
-        {
-          path: "*",
-          element: <PageNotFound />,
-        },
       ],
     },
   ]);
