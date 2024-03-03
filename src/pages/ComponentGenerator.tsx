@@ -1,5 +1,5 @@
 const ComponentGenerator = () => {
-  return <div>ComponentGenerator</div>;
+  return <button>ComponentGenerator</button>;
 };
 
 export default ComponentGenerator;
