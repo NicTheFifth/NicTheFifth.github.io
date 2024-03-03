@@ -15,21 +15,14 @@ function App() {
       element: <PageNotFound />,
       children: [
         {
-          path: "componentgenerator",
+          path: "/componentgenerator",
           element: <ComponentGenerator />,
         },
       ],
     },
   ]);
 
-  return (
-    <HashRouter>
-      <Routes>
-        <Route path="/" index element={<PageNotFound />} />
-        <Route path="/componentgenerator" element={<ComponentGenerator />} />
-      </Routes>
-    </HashRouter>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
