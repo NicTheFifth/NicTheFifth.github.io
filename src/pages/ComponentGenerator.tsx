@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 
@@ -60,6 +61,7 @@ const ComponentGenerator = () => {
           ))}
         </TextField>
       </Box>
+      <Button type="submit">Generate Java</Button>
     </form>
   );
 };
