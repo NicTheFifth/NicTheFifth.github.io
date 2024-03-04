@@ -28,29 +28,39 @@ const ComponentGenerator = () => {
     value: string;
     colour: ChatColor;
   };
+
+  const updateComponent = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  };
+
   return (
-    <Box
-      component="form"
-      sx={{
-        "& .MuiTextField-root": { m: 1, width: "25ch" },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <TextField
-        id="Chat_colour"
-        select
-        label="Select"
-        defaultValue="EUR"
-        helperText="Select chatcolour for component"
+    <form onSubmit={updateComponent}>
+      <Box
+        component="form"
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
       >
-        {ChatColors.map((option) => (
-          <MenuItem key={option} value={option}>
-            {option}
+        <TextField
+          id="Chat_colour"
+          select
+          label="Select"
+          defaultValue="EUR"
+          helperText="Select chatcolour for component"
+        >
+          <MenuItem key="None" value="">
+            None
           </MenuItem>
-        ))}
-      </TextField>
-    </Box>
+          {ChatColors.map((option) => (
+            <MenuItem key={option} value={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </TextField>
+      </Box>
+    </form>
   );
 };
 
