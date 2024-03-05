@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
+import { createRef } from "react";
 
 const ComponentGenerator = () => {
   const ChatColors = [
@@ -28,10 +29,11 @@ const ComponentGenerator = () => {
     value: string;
     colour: ChatColor;
   };
+  const ref = createRef();
 
   const updateComponent = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    alert("Submitted");
+    alert("Submitted \n" + ref.current);
   };
 
   return (
@@ -44,7 +46,7 @@ const ComponentGenerator = () => {
         noValidate
         autoComplete="off"
       >
-        <Input multiline={true} />
+        <Input multiline={true} inputRef={ref} />
       </Box>
       <Button type="submit">Generate Java</Button>
     </form>
