@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
-import TextField from "@mui/material/TextField";
+import Input from "@mui/material/Input";
 
 const ComponentGenerator = () => {
   const ChatColors = [
@@ -44,22 +43,7 @@ const ComponentGenerator = () => {
         noValidate
         autoComplete="off"
       >
-        <TextField
-          id="Chat_colour"
-          select
-          label="Select"
-          defaultValue="EUR"
-          helperText="Select chatcolour for component"
-        >
-          <MenuItem key="None" value="">
-            None
-          </MenuItem>
-          {ChatColors.map((option) => (
-            <MenuItem key={option} value={option}>
-              {option}
-            </MenuItem>
-          ))}
-        </TextField>
+        <Input></Input>
       </Box>
       <Button type="submit">Generate Java</Button>
     </form>
