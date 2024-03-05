@@ -31,6 +31,7 @@ const ComponentGenerator = () => {
 
   const updateComponent = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    alert("Submitted");
   };
 
   return (
@@ -43,7 +44,7 @@ const ComponentGenerator = () => {
         noValidate
         autoComplete="off"
       >
-        <Input></Input>
+        <Input multiline={true} />
       </Box>
       <Button type="submit">Generate Java</Button>
     </form>
