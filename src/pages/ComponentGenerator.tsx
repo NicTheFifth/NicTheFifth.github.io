@@ -29,11 +29,11 @@ const ComponentGenerator = () => {
     value: string;
     colour: ChatColor;
   };
-  const ref: React.RefObject<string> = createRef();
+  const ref: React.RefObject<HTMLTextAreaElement> = createRef();
 
   const updateComponent = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    alert("Submitted \n" + ref.current);
+    alert("Submitted \n" + ref.current?.value);
   };
 
   return (
