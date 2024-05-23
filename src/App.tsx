@@ -23,8 +23,8 @@ function App() {
   return (
     <Box
       sx={{ background: "linear-gradient(#1a857d, #167c4c)" }}
-      minHeight={100}
-      minWidth={100}
+      minHeight={"100vh"}
+      minWidth={"100vw"}
     >
       <RouterProvider router={router} />
     </Box>
