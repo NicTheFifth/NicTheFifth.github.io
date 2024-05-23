@@ -2,7 +2,6 @@ import { createHashRouter, RouterProvider } from "react-router-dom";
 import ComponentGenerator from "./pages/ComponentGenerator";
 import PageNotFound from "./pages/PageNotFound";
 import HomePage from "./pages/HomePage";
-import Box from "@mui/material/Box";
 
 function App() {
   const router = createHashRouter([
@@ -20,15 +19,7 @@ function App() {
     },
   ]);
 
-  return (
-    <Box
-      sx={{ background: "linear-gradient(#1a857d, #167c4c)" }}
-      minHeight={"100vh"}
-      minWidth={"100vw"}
-    >
-      <RouterProvider router={router} />
-    </Box>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

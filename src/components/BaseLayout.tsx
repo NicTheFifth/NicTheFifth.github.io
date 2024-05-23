@@ -1,3 +1,4 @@
+import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 
 type Props = {
@@ -6,13 +7,14 @@ type Props = {
 
 const BaseLayout = ({ children }: Props) => {
   return (
-    <>
-      <main>
-        <Container maxWidth="md" sx={{ mt: 5 }}>
-          {children}
-        </Container>
-      </main>
-    </>
+    <Box
+      sx={{ background: "linear-gradient(#1a857d, #167c4c)" }}
+      minHeight={"100vh"}
+    >
+      <Container maxWidth="md" sx={{ pt: 5 }}>
+        {children}
+      </Container>
+    </Box>
   );
 };
 
