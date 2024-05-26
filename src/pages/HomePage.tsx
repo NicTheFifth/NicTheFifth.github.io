@@ -16,11 +16,14 @@ const HomePage = () => {
               mx: "auto",
               borderRadius: 10,
               backgroundImage: "linear-gradient(45deg, #3ca59d, #38a16f)",
-              height: "3rem",
               position: "relative",
             }}
           >
-            <Typography variant="h1" visibility="hidden">
+            <Typography
+              variant="h1"
+              sx={{ rotate: "11deg", skewY: "11deg" }}
+              visibility="hidden"
+            >
               Welcome to derg Noctis' page.
             </Typography>
           </Paper>
