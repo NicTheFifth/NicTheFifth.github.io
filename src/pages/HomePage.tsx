@@ -25,7 +25,7 @@ const HomePage = () => {
               sx={{ rotate: "11deg", skewY: "11deg" }}
               visibility="hidden"
             >
-              Welcome to derg Noctis' page.
+              Welcome to derg Noctis' page
             </Typography>
           </Paper>
         </Box>
@@ -47,7 +47,7 @@ const HomePage = () => {
               sx={{ rotate: "11deg", skewY: "11deg" }}
               visibility="hidden"
             >
-              Welcome to derg Noctis' page.
+              Welcome to derg Noctis' page
             </Typography>
           </Paper>
         </Box>
@@ -65,7 +65,7 @@ const HomePage = () => {
           }}
         >
           <Typography variant="h1" sx={{ rotate: "11deg", skewY: "11deg" }}>
-            Welcome to derg Noctis' page.
+            Welcome to derg Noctis' page
           </Typography>
         </Paper>
       </Box>
