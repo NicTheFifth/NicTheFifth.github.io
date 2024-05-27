@@ -15,8 +15,31 @@ const HomePage = () => {
               width: "fit-content",
               mx: "auto",
               borderRadius: 10,
-              backgroundImage: "linear-gradient(45deg, #3ca59d, #38a16f)",
+              backgroundImage: "linear-gradient(-11deg, #38a16f, #3ca59d)",
               position: "relative",
+              zIndex: 2,
+            }}
+          >
+            <Typography
+              variant="h1"
+              sx={{ rotate: "11deg", skewY: "11deg" }}
+              visibility="hidden"
+            >
+              Welcome to derg Noctis' page.
+            </Typography>
+          </Paper>
+        </Box>
+        <Box height={0}>
+          <Paper
+            sx={{
+              rotate: "-11deg",
+              skewY: "-11deg",
+              width: "fit-content",
+              mx: "auto",
+              borderRadius: 10,
+              backgroundImage: "linear-gradient(45deg, #38a16f, #3ca59d)",
+              position: "relative",
+              zIndex: 1,
             }}
           >
             <Typography
@@ -35,8 +58,10 @@ const HomePage = () => {
             width: "fit-content",
             mx: "auto",
             borderRadius: 10,
-            backgroundImage: "linear-gradient(45deg, #38a16f, #3ca59d)",
+            backgroundImage: "linear-gradient(11deg, #38a16f, #3ca59d)",
             position: "relative",
+            zIndex: 2,
+            boxShadow: "none",
           }}
         >
           <Typography variant="h1" sx={{ rotate: "11deg", skewY: "11deg" }}>
