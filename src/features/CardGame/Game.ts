@@ -8,9 +8,16 @@ export const doStep = (
   update: Dispatch<SetStateAction<GameField>>
 ) => {
   gameActionQueue.push(trigger(gameField.enemy.front, "enemy"));
-  const toDo = gameActionQueue.pop();
-  const newField = toDo && toDo(gameField);
-  newField && update({ player: newField.player, enemy: newField.enemy });
+  gameActionQueue.push(trigger(gameField.enemy.middle, "enemy"));
+  gameActionQueue.push(trigger(gameField.enemy.back, "enemy"));
+  gameActionQueue.push(trigger(gameField.player.front, "player"));
+  gameActionQueue.push(trigger(gameField.player.middle, "player"));
+  gameActionQueue.push(trigger(gameField.player.back, "player"));
+  while (gameActionQueue.length != 0) {
+    const toDo = gameActionQueue.pop();
+    const newField = toDo && toDo(gameField);
+    newField && update({ player: newField.player, enemy: newField.enemy });
+  }
 };
 
 const trigger = (card: GameCardType | undefined, team: "enemy" | "player") => {
