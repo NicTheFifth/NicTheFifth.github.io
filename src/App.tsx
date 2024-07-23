@@ -1,17 +1,20 @@
 import { createHashRouter, RouterProvider } from "react-router-dom";
-import ComponentGenerator from "./pages/ComponentGenerator";
 import PageNotFound from "./pages/PageNotFound";
 import HomePage from "./pages/HomePage";
+import React from "react";
+
+const CardGame = React.lazy(() => import("./pages/CardGame"));
 
 function App() {
   const router = createHashRouter([
     {
+      index: true,
       path: "/",
       element: <HomePage />,
     },
     {
-      path: "/componentgenerator",
-      element: <ComponentGenerator />,
+      path: "/card-game",
+      element: <CardGame />,
     },
     {
       path: "*",
