@@ -34,7 +34,6 @@ const trigger = (
   card: GameCardType | undefined,
   team: "enemy" | "player"
 ): ((gameField: GameField) => GameField) => {
-  console.log(card?.health);
   if (card == undefined || card.health <= 0) return skip;
   card.countdownCurrent -= 1;
   if (card.countdownCurrent == 0)
