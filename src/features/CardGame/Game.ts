@@ -24,7 +24,7 @@ const trigger = (
   card: GameCardType | undefined,
   team: "enemy" | "player"
 ): ((gameField: GameField) => GameField) => {
-  if (card == undefined || card.health == 0) return skip;
+  if (card == undefined || card.health <= 0) return skip;
   card.countdownCurrent -= 1;
   if (card.countdownCurrent == 0)
     return (gameField: GameField) => {
