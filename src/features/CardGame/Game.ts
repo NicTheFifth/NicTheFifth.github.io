@@ -1,29 +1,40 @@
 import { Dispatch, SetStateAction } from "react";
 import { GameCardType, GameField } from "../../types/CardGameTypes";
 
-const gameActionQueue: ((gameField: GameField) => GameField)[] = [];
+const gameActionQueue: (() => (gameField: GameField) => GameField)[] = [];
 
 export const doStep = (
   gameField: GameField,
   update: Dispatch<SetStateAction<GameField>>
 ) => {
-  gameActionQueue.push(trigger(gameField.enemy.front, "enemy"));
-  gameActionQueue.push(trigger(gameField.enemy.middle, "enemy"));
-  gameActionQueue.push(trigger(gameField.enemy.back, "enemy"));
-  gameActionQueue.push(trigger(gameField.player.front, "player"));
-  gameActionQueue.push(trigger(gameField.player.middle, "player"));
-  gameActionQueue.push(trigger(gameField.player.back, "player"));
+  gameActionQueue.push(queueTrigger(gameField.player.back, "player"));
+  gameActionQueue.push(queueTrigger(gameField.player.middle, "player"));
+  gameActionQueue.push(queueTrigger(gameField.player.front, "player"));
+  gameActionQueue.push(queueTrigger(gameField.enemy.back, "enemy"));
+  gameActionQueue.push(queueTrigger(gameField.enemy.middle, "enemy"));
+  gameActionQueue.push(queueTrigger(gameField.enemy.front, "enemy"));
   while (gameActionQueue.length != 0) {
-    const toDo = gameActionQueue.pop();
-    const newField = toDo && toDo(gameField);
-    newField && update({ player: newField.player, enemy: newField.enemy });
+    const toDoSupplier = gameActionQueue.pop();
+    const toDo = toDoSupplier && toDoSupplier();
+    toDo && toDo(gameField);
+    update({ player: gameField.player, enemy: gameField.enemy });
   }
+};
+
+const queueTrigger = (
+  card: GameCardType | undefined,
+  team: "enemy" | "player"
+) => {
+  return () => {
+    return trigger(card, team);
+  };
 };
 
 const trigger = (
   card: GameCardType | undefined,
   team: "enemy" | "player"
 ): ((gameField: GameField) => GameField) => {
+  console.log(card?.health);
   if (card == undefined || card.health <= 0) return skip;
   card.countdownCurrent -= 1;
   if (card.countdownCurrent == 0)
