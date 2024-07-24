@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { GameCardType, GameField } from "../../types/CardGameTypes";
+import { GameCardType, GameField, GameRow } from "../../types/CardGameTypes";
 
 const gameActionQueue: (() => (gameField: GameField) => GameField)[] = [];
 
@@ -55,19 +55,31 @@ const attack = (
   const enemyTeam = team === "enemy" ? gameField.player : gameField.enemy;
   if (enemyTeam.front !== undefined) {
     enemyTeam.front.health -= card.attack;
-    enemyTeam.front.health <= 0 && (enemyTeam.front = undefined);
+    enemyTeam.front.health <= 0 && kill(enemyTeam, "front");
     return gameField;
   }
   if (enemyTeam.middle !== undefined) {
     enemyTeam.middle.health -= card.attack;
-    enemyTeam.middle.health < 0 && (enemyTeam.middle = undefined);
+    enemyTeam.middle.health < 0 && kill(enemyTeam, "middle");
     return gameField;
   }
   if (enemyTeam.back !== undefined) {
     enemyTeam.back.health -= card.attack;
-    enemyTeam.back.health < 0 && (enemyTeam.back = undefined);
+    enemyTeam.back.health < 0 && kill(enemyTeam, "back");
     return gameField;
   }
 
   return gameField;
+};
+
+const kill = (row: GameRow, position: keyof GameRow) => {
+  row[position] = undefined;
+  if (!row.front) {
+    row.front = row.middle;
+    row.middle = undefined;
+  }
+  if (!row.middle) {
+    row.middle = row.back;
+    row.back = undefined;
+  }
 };
