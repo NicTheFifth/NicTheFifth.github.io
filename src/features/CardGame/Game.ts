@@ -20,9 +20,19 @@ export const doStep = (
   }
 };
 
-const trigger = (card: GameCardType | undefined, team: "enemy" | "player") => {
+const trigger = (
+  card: GameCardType | undefined,
+  team: "enemy" | "player"
+): ((gameField: GameField) => GameField) => {
   if (card == undefined || card.health == 0) return skip;
-  return (gameField: GameField) => attack(team, card, gameField);
+  card.countdownCurrent -= 1;
+  if (card.countdownCurrent == 0)
+    return (gameField: GameField) => {
+      const field = attack(team, card, gameField);
+      card.countdownCurrent = card.countdown;
+      return field;
+    };
+  return skip;
 };
 
 const skip = (gameField: GameField): GameField => gameField;
@@ -35,7 +45,7 @@ const attack = (
   const enemyTeam = team === "enemy" ? gameField.player : gameField.enemy;
   if (enemyTeam.front !== undefined) {
     enemyTeam.front.health -= card.attack;
-    enemyTeam.front.health < 0 && (enemyTeam.front = undefined);
+    enemyTeam.front.health <= 0 && (enemyTeam.front = undefined);
     return gameField;
   }
   if (enemyTeam.middle !== undefined) {

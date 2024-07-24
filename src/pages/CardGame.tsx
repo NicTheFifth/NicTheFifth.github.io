@@ -9,15 +9,15 @@ const CardGame = () => {
   const [gameState, setGameState] = useState<GameField>({
     player: {
       front: {
-        attack: 4,
+        attack: 1,
         countdown: 3,
-        countdownCurrent: 1,
+        countdownCurrent: 2,
         health: 10,
         maxHealth: 20,
         name: "Shmog",
       },
       middle: {
-        attack: 4,
+        attack: 2,
         countdown: 3,
         countdownCurrent: 1,
         health: 10,
@@ -28,7 +28,7 @@ const CardGame = () => {
     enemy: {
       front: {
         attack: 4,
-        countdown: 3,
+        countdown: 2,
         countdownCurrent: 1,
         health: 10,
         maxHealth: 20,
@@ -43,7 +43,7 @@ const CardGame = () => {
 
   return (
     <>
-      <Grid container spacing={10} mx={2} mt={4}>
+      <Grid container spacing={6} mx={2} mt={4}>
         <Grid container xs={6} spacing={2} direction="row-reverse">
           <Grid xs={4}>
             {gameState.player.front && (
