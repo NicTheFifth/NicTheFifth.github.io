@@ -1,9 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
 import { GameCardType, GameField, GameRow } from "../../types/CardGameTypes";
 
-const gameActionQueue: (() => (gameField: GameField) => GameField)[] = [];
+const gameActionQueue: (() =>
+  | ((gameField: GameField) => GameField)
+  | undefined)[] = [];
 
-export const doStep = (
+export const doStep = async (
   gameField: GameField,
   update: Dispatch<SetStateAction<GameField>>
 ) => {
@@ -18,6 +20,7 @@ export const doStep = (
     const toDo = toDoSupplier && toDoSupplier();
     toDo && toDo(gameField);
     update({ player: gameField.player, enemy: gameField.enemy });
+    toDo && (await new Promise((r) => setTimeout(r, 1000)));
   }
 };
 
@@ -33,8 +36,8 @@ const queueTrigger = (
 const trigger = (
   card: GameCardType | undefined,
   team: keyof GameField
-): ((gameField: GameField) => GameField) => {
-  if (card == undefined || card.health <= 0) return skip;
+): ((gameField: GameField) => GameField) | undefined => {
+  if (card == undefined || card.health <= 0) return undefined;
   card.countdownCurrent -= 1;
   if (card.countdownCurrent == 0)
     return (gameField: GameField) => {

@@ -40,7 +40,7 @@ const CardGame = () => {
   const step = (_: any) => {
     doStep(gameState, setGameState);
   };
-
+  console.log("rerender");
   return (
     <>
       <Grid container spacing={6} mx={2} mt={4}>
