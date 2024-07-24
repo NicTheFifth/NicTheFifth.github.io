@@ -23,7 +23,7 @@ export const doStep = (
 
 const queueTrigger = (
   card: GameCardType | undefined,
-  team: "enemy" | "player"
+  team: keyof GameField
 ) => {
   return () => {
     return trigger(card, team);
@@ -32,7 +32,7 @@ const queueTrigger = (
 
 const trigger = (
   card: GameCardType | undefined,
-  team: "enemy" | "player"
+  team: keyof GameField
 ): ((gameField: GameField) => GameField) => {
   if (card == undefined || card.health <= 0) return skip;
   card.countdownCurrent -= 1;
@@ -48,7 +48,7 @@ const trigger = (
 const skip = (gameField: GameField): GameField => gameField;
 
 const attack = (
-  team: "enemy" | "player",
+  team: keyof GameField,
   card: GameCardType,
   gameField: GameField
 ): GameField => {
