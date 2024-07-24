@@ -9,11 +9,10 @@ type CardProps = { card: GameCardType };
 const GameCard = ({ card }: CardProps) => {
   return card ? (
     <Card>
-      {" "}
       <CardHeader
         title={card.name}
         titleTypographyProps={{ textAlign: "center" }}
-      />{" "}
+      />
       <Grid container mx={2}>
         <Grid xs={6}> {card.health}</Grid>
         <Grid xs={6} textAlign="end">
