@@ -4,7 +4,9 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
-type CardProps = { card: GameCardType };
+type CardProps = {
+  card: GameCardType;
+};
 
 const GameCard = ({ card }: CardProps) => {
   return card ? (
