@@ -1,21 +1,19 @@
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { createRef, useRef, useState } from "react";
-import { CardPositions, GameField } from "../types/CardGameTypes";
+import { createRef, useState } from "react";
+import { GameField } from "../types/CardGameTypes";
 import GameCard from "../components/cardGame/GameCard";
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import { doStep } from "../features/CardGame/Game";
+import { enemies } from "../assets/enemies.json";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 const CardGame = () => {
+  const theme = useTheme();
+  const playable = useMediaQuery(theme.breakpoints.up("md"));
   const [gameState, setGameState] = useState<GameField>({
     player: {
-      front: {
-        attack: 1,
-        countdown: 3,
-        countdownCurrent: 2,
-        health: 10,
-        maxHealth: 20,
-        name: "Shmog",
-      },
+      front: { ...enemies.shmog },
       middle: {
         attack: 2,
         countdown: 3,
@@ -24,6 +22,7 @@ const CardGame = () => {
         maxHealth: 20,
         name: "Shmog",
       },
+      back: { ...enemies.shmog },
     },
     enemy: {
       front: {
@@ -37,25 +36,14 @@ const CardGame = () => {
     },
   });
 
-  const cardStats = useRef<CardPositions>({
-    height: undefined,
-    player: { front: undefined, middle: undefined, back: undefined },
-    enemy: { front: undefined, middle: undefined, back: undefined },
-  });
-
   const playerFrontRef = createRef<HTMLDivElement>();
   const enemyFrontRef = createRef<HTMLDivElement>();
-  const updateCardStats = () => {
-    cardStats.current.player.front = playerFrontRef.current?.offsetLeft;
-    cardStats.current.height = playerFrontRef.current?.offsetTop;
-    cardStats.current.enemy.front = enemyFrontRef.current?.offsetLeft;
-  };
 
   const step = (_: any) => {
     doStep(gameState, setGameState);
   };
 
-  return (
+  return playable ? (
     <>
       <Grid container spacing={6} mx={2} mt={4}>
         <Grid container xs={6} spacing={2} direction="row-reverse">
@@ -66,9 +54,7 @@ const CardGame = () => {
           </Grid>
           <Grid
             xs={4}
-            ref={(ref) => {
-              ref && (cardStats.current.player.middle = ref?.offsetLeft);
-            }}
+            // ref={}
           >
             {gameState.player.middle && (
               <GameCard card={gameState.player.middle} />
@@ -76,9 +62,7 @@ const CardGame = () => {
           </Grid>
           <Grid
             xs={4}
-            ref={(ref) => {
-              ref && (cardStats.current.player.middle = ref?.offsetLeft);
-            }}
+            // ref={}
           >
             {gameState.player.back && <GameCard card={gameState.player.back} />}
           </Grid>
@@ -89,9 +73,7 @@ const CardGame = () => {
           </Grid>
           <Grid
             xs={4}
-            ref={(ref) => {
-              ref && (cardStats.current.enemy.middle = ref?.offsetLeft);
-            }}
+            // ref={}
           >
             {gameState.enemy.middle && (
               <GameCard card={gameState.enemy.middle} />
@@ -99,23 +81,13 @@ const CardGame = () => {
           </Grid>
           <Grid
             xs={4}
-            ref={(ref) => {
-              ref && (cardStats.current.enemy.back = ref?.offsetLeft);
-            }}
+            // ref={}
           >
             {gameState.enemy.back && <GameCard card={gameState.enemy.back} />}
           </Grid>
         </Grid>
       </Grid>
       <Button onClick={step}>Step</Button>
-      <Button
-        onClick={() => {
-          updateCardStats();
-          console.log(cardStats.current);
-        }}
-      >
-        Data
-      </Button>
       <Button
         onClick={() => {
           const pfl = playerFrontRef.current?.offsetLeft;
@@ -140,6 +112,12 @@ const CardGame = () => {
       >
         Attack animate
       </Button>
+    </>
+  ) : (
+    <>
+      <Typography variant="h1" padding={10} textAlign="center">
+        Can't play this on such a small screen
+      </Typography>
     </>
   );
 };

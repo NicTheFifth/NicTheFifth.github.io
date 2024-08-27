@@ -1,0 +1,12 @@
+{
+    "enemies": {
+        "shmog": {
+            "attack": 1,
+            "countdown": 3,
+            "countdownCurrent": 2,
+            "health": 10,
+            "maxHealth": 20,
+            "name": "Shmog"
+        }
+    }
+}

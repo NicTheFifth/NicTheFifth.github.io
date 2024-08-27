@@ -14,17 +14,3 @@ export type GameCardType = {
   countdown: number;
   countdownCurrent: number;
 };
-
-export type CardPositions = {
-  height?: Number;
-  player: CardRow;
-  enemy: CardRow;
-};
-
-export type CardRow = {
-  front?: CardPosition;
-  middle?: CardPosition;
-  back?: CardPosition;
-};
-
-export type CardPosition = Number;
