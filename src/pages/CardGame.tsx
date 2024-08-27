@@ -59,7 +59,7 @@ const CardGame = () => {
     <>
       <Grid container spacing={6} mx={2} mt={4}>
         <Grid container xs={6} spacing={2} direction="row-reverse">
-          <Grid xs={4} ref={playerFrontRef}>
+          <Grid xs={4} ref={playerFrontRef} position="relative" left={0}>
             {gameState.player.front && (
               <GameCard card={gameState.player.front} />
             )}
@@ -115,6 +115,30 @@ const CardGame = () => {
         }}
       >
         Data
+      </Button>
+      <Button
+        onClick={() => {
+          const pfl = playerFrontRef.current?.offsetLeft;
+          const efl = enemyFrontRef.current?.offsetLeft;
+          const ew = enemyFrontRef.current?.clientWidth;
+          if (playerFrontRef.current && pfl && efl && ew) {
+            playerFrontRef.current.style.transition = "0.5s left ease-in";
+            playerFrontRef.current.style.left = efl - ew * (2 / 3) - pfl + "px";
+            playerFrontRef.current?.addEventListener(
+              "transitionend",
+              () => {
+                if (playerFrontRef.current) {
+                  playerFrontRef.current.style.transition =
+                    "0.5s left ease-out";
+                  playerFrontRef.current.style.left = 0 + "px";
+                }
+              },
+              { once: true }
+            );
+          }
+        }}
+      >
+        Attack animate
       </Button>
     </>
   );
